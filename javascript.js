@@ -119,7 +119,7 @@ function backspace (lastCharacter) {
     if (lastCharacter === ".") {
         dotAllowed = true;
     }
-    displayValue = displayValue.slice(0,stringLength-1);
+    displayValue = displayValue.slice(0,displayValue.length-1);
     display.textContent = displayValue;
 }
 
