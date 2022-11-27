@@ -47,7 +47,12 @@ function modifyDisplay(button) {
         return;
     } 
     if (stringLength === 16) {                                            //prevent from executing anything below it when the display is full
-        return;
+        if (buttonValue === "=") {
+            getResult();
+            return;
+        } else {
+            return;
+        }
     }
 
     if (operators.includes(buttonValue)) {
@@ -65,7 +70,7 @@ function modifyDisplay(button) {
                 currentOperator = buttonValue;
                }
     }
-    
+
 
     if (operators.includes(buttonValue)) {                                
         dotAllowed = true;
