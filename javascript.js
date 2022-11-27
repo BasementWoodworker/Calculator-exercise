@@ -11,7 +11,7 @@ function multiply(...args) {
 }
 
 function divide(divident,divisor) {
-    result = divisor == 0 ? "Error" : (divident/divisor);
+    let result = divisor == 0 ? "Error" : (divident/divisor);
     if (result !== "Error") {
         result = +result.toFixed(5);                            //the '+' removes extra zeroes from the number
     }                       
@@ -32,7 +32,7 @@ function operate(operator, num1, num2) {
 function modifyDisplay(button) {
     let buttonValue = button.srcElement.textContent;
     const lastCharacter = displayValue[displayValue.length-1];
-    stringLength = displayValue.length;
+    const stringLength = displayValue.length;
 
     if (displayValue === "Error" || displayValue === "0") {
         clear();
@@ -100,11 +100,11 @@ function modifyDisplay(button) {
 
 
 function getResult() {
-    array = displayValue.split(currentOperator);
+    const array = displayValue.split(currentOperator);
     if (array.includes("") || array.includes(".") || currentOperator === "none") {
         return;
     }
-    result = operate(currentOperator,array[0],array[1]);
+    const result = operate(currentOperator,array[0],array[1]);
     displayValue = result;
     display.textContent = result;
     currentOperator = "none";
@@ -135,8 +135,8 @@ const operators = ["+","-","*","/"];
 let currentOperator = "none";
 let dotAllowed = true;
 
-display = document.querySelector("#display");
-displayValue = "";
+const display = document.querySelector("#display");
+let displayValue = "";
 
 const buttons = document.querySelectorAll("button");
 buttons.forEach(button => button.addEventListener("click",modifyDisplay))
