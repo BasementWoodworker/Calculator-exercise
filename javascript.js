@@ -27,6 +27,10 @@ function operate(operator, num1, num2) {
     return result.toString();
 }
 
+function isNumber (value) {
+    return isNaN(value*1) ? false : true;
+}
+
 
 
 function modifyDisplay(button) {
@@ -35,6 +39,10 @@ function modifyDisplay(button) {
     const stringLength = displayValue.length;
 
     if (displayValue === "Error" || displayValue === "0") {
+        clear();
+    }
+
+    if (displayValue === operationResult && (isNumber(buttonValue) || buttonValue === ".")) {
         clear();
     }
     
@@ -80,7 +88,7 @@ function modifyDisplay(button) {
         return;
     } else if (buttonValue === "." && dotAllowed) {
         dotAllowed = false;
-        if (operators.includes(lastCharacter) || lastCharacter === undefined) {
+        if (operators.includes(lastCharacter) || displayValue === "") {
             buttonValue = "0".concat(buttonValue);
         }
     }
@@ -104,11 +112,11 @@ function getResult() {
     if (array.includes("") || array.includes(".") || currentOperator === "none") {
         return;
     }
-    const result = operate(currentOperator,array[0],array[1]);
-    displayValue = result;
-    display.textContent = result;
+    operationResult = operate(currentOperator,array[0],array[1]);
+    displayValue = operationResult;
+    display.textContent = operationResult;
     currentOperator = "none";
-    result.includes(".") ? dotAllowed = false : dotAllowed = true;
+    operationResult.includes(".") ? dotAllowed = false : dotAllowed = true;
 }
 
 function backspace (lastCharacter) {
@@ -134,6 +142,7 @@ function clear() {
 const operators = ["+","-","*","/"];
 let currentOperator = "none";
 let dotAllowed = true;
+let operationResult;
 
 const display = document.querySelector("#display");
 let displayValue = "";
