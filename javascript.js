@@ -109,6 +109,11 @@ function modifyDisplay(button) {
 
 function getResult() {
     const array = displayValue.split(currentOperator);
+    if (array[0] === "") {                                              //remove empty element that occurs when first number is negative and you click "-"
+        array.shift()
+        array[0] = "-".concat(array[0]);
+    }                  
+
     if (array.includes("") || array.includes(".") || currentOperator === "none") {
         return;
     }
